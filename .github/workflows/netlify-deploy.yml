@@ -1,0 +1,63 @@
+name: Netlify Deploy
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'todo-frontend/**'
+      - '.github/workflows/netlify-deploy.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'todo-frontend/**'
+      - '.github/workflows/netlify-deploy.yml'
+
+env:
+  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+  VITE_QUOTES_API_KEY: ${{ secrets.VITE_QUOTES_API_KEY }}
+  VITE_QUOTES_API_URL: ${{ secrets.VITE_QUOTES_API_URL }}
+  VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    defaults:
+      run:
+        working-directory: ./todo-frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: todo-frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_QUOTES_API_KEY: ${{ secrets.VITE_QUOTES_API_KEY }}
+          VITE_QUOTES_API_URL: ${{ secrets.VITE_QUOTES_API_URL }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: './todo-frontend/dist'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy"
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+          overwrites-pull-request-comment: false
+          netlify-config-path: './todo-frontend/netlify.toml'
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} 
