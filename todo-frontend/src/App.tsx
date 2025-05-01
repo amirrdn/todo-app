@@ -7,8 +7,6 @@ import Dashboard from './components/Dashboard/Dashboard';
 import { useAuthStore } from './store/authStore';
 
 const theme = extendTheme({});
-
-// Filter out React Router warnings
 const originalWarn = console.warn;
 console.warn = (...args) => {
   if (typeof args[0] === 'string' && 

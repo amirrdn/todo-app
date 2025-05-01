@@ -2,6 +2,9 @@
 
 A fullstack Todo application built with React, TypeScript, Node.js, and MySQL.
 
+## Demo
+- Frontend: [https://apptodoreactnet.netlify.app/](https://apptodoreactnet.netlify.app/)
+
 ## Features
 
 - User Authentication (Register, Login, Logout)
@@ -32,10 +35,10 @@ A fullstack Todo application built with React, TypeScript, Node.js, and MySQL.
 
 ## CI/CD Setup
 
-### Frontend (Vercel)
+### Frontend (Netlify)
 - Automated testing and building
-- Deployment to Vercel
-- Environment variables managed in Vercel
+- Deployment to Netflify
+- Environment variables managed in Netlify
 
 ### Backend (Railway)
 - Automated testing and building
