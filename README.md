@@ -103,19 +103,38 @@ todo/
 │   │   ├── controllers/
 │   │   ├── middleware/
 │   │   ├── routes/
+│   │   ├── services/
+│   │   ├── dto/
 │   │   ├── generated/
+│   │   ├── __tests__/
 │   │   ├── prisma.ts
 │   │   └── index.ts
 │   ├── prisma/
-│   └── package.json
+│   │   ├── migrations/
+│   │   └── schema.prisma
+│   ├── coverage/
+│   ├── jest.config.js
+│   ├── netlify.toml
+│   ├── package.json
+│   ├── railway.json
+│   ├── tsconfig.json
+│   └── vercel.json
 └── todo-frontend/
     ├── src/
     │   ├── components/
     │   ├── services/
+    │   ├── store/
     │   ├── theme.ts
     │   ├── App.tsx
     │   └── main.tsx
-    └── package.json
+    ├── dist/
+    ├── public/
+    ├── package.json
+    ├── postcss.config.js
+    ├── tailwind.config.js
+    ├── tsconfig.json
+    ├── vite.config.ts
+    └── vitest.config.ts
 ```
 
 ## API Endpoints
